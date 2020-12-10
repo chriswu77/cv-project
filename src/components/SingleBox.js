@@ -2,12 +2,18 @@
 import React from 'react';
 
 const SingleBox = (props) => {
-  const { title, type, id } = props;
+  const { title, type, id, update, val } = props;
 
   return (
     <div className="single-box">
       <label htmlFor={id}>{title}</label>
-      <input className="single-form form" type={type} id={id} />
+      <input
+        className="single-form form"
+        type={type}
+        id={id}
+        value={val}
+        onChange={update}
+      />
     </div>
   );
 };

@@ -1,18 +1,48 @@
+@import-normalize;
+
 html, body {
     font-family: 'Roboto', sans-serif; 
 }
 
-.contact-info-container {
-    /* max-width: 60%; */
+p, h1 {
+    padding: 0;
+    margin: 0;
 }
 
-.edit-view {
-    display: flex;
+.contact-info-container, .work-exp-container {
+    /* display: inline-flex;
+    flex-direction: column; */
+    /* max-width: 60%; */
+    /* max-width: 1100px; */
+    border: 2px solid #2d2d2d;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.App, .edit-view, .submitted-view {
+    display: inline-flex;
     flex-direction: column;
+}
+
+.submitted-line {
+    padding: 5px 0;
+}
+
+.heading {
+    margin-bottom: 10px;
+    border: 1px solid #2d2d2d;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.name {
+    font-size: 1.5rem;
 }
 
 label {
     font-size: 20px;
+    padding-bottom: 5px;
 }
 
 .box-container {
@@ -53,8 +83,99 @@ label {
     margin-right: 15px;
 }
 
-.save-btn, .cancel-btn {
+.cancel-btn, .trash-btn {
+    color: #2d2d2d;
+    background-color: #FFFFFF;
+}
+
+.trash-icon {
+    margin-right: 5px;
+}
+
+.save-btn, .cancel-btn, .trash-btn {
     font-size: 15px;
     padding: 5px;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-control, .flag-dropdown {
+    border-color: rgb(118, 118, 118) !important;
+}
+
+.react-tel-input .form-control {
+    height: 43px !important;
+	width: 324px !important;
+    font-size: 20px !important;
+}
+
+.edit-icon {
+    font-size: 20px;
+    margin-left: 15px;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.date-dbl-container {
+    display: inline-flex;
+    justify-content: space-between;
+    padding-right: 30px;
+    padding-bottom: 12px;
+}
+
+.date-single-container {
+    display: flex;
+}
+
+.year-container, .month-container, .year {
+    display: flex;
+    flex-direction: column;
+}
+
+#from-month-dropdown, #to-month-dropdown, #from-year, #to-year {
+    font-size: 20px;
+}
+
+#from-month-dropdown, #to-month-dropdown {
+    height: 43px;
+    padding: 0px 0px 0px 5px;
+}
+
+#from-year, #to-year {
+    padding: 0px 0px 0px 5px;
+    margin: 0;
+    height: 39px;
+}
+
+.month-container {
+    margin-right: 5px;
+}
+
+.description-box {
+    display: flex;
+    flex-direction: column;
+    padding-right: 30px;
+    padding-bottom: 30px;
+}
+
+#description {
+    font-family: 'Roboto', sans-serif; 
+    font-size: 20px;
+    padding: 10px;
+}
+
+.header, #work-exp-header, .btn-container, .edit-btn-container {
+    display: flex;
+}
+
+.edit-btn-container {
+    justify-content: space-between;
+    padding-right: 30px;
+}
+
+.plus-icon {
+    font-size: 20px;
+    margin-left: 15px;
+    margin-top: 9px;
+    cursor: pointer;
 }

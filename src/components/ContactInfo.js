@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import '../style.css';
-import DoubleBox from './DoubleBox';
-import SingleBox from './SingleBox';
-import HalfBox from './HalfBox';
+import ContactInfoForm from './ContactInfoForm';
+import ContactInfoSubmitted from './ContactInfoSubmitted';
 
 class ContactInfo extends Component {
   constructor() {
@@ -13,16 +12,68 @@ class ContactInfo extends Component {
       lastName: '',
       email: '',
       phone: '',
-      country: '',
       address: '',
       city: '',
       state: '',
       zip: '',
+      edit: true,
     };
   }
 
   updateFirstName = (e) => {
-    console.log('pogchamp');
+    this.setState({
+      firstName: e.target.value,
+    });
+  };
+
+  updateLastName = (e) => {
+    this.setState({
+      lastName: e.target.value,
+    });
+  };
+
+  updateEmail = (e) => {
+    this.setState({
+      email: e.target.value,
+    });
+  };
+
+  updatePhone = (phone) => {
+    this.setState({
+      phone: phone,
+    });
+  };
+
+  updateAddress = (e) => {
+    this.setState({
+      address: e.target.value,
+    });
+  };
+
+  updateCity = (e) => {
+    this.setState({
+      city: e.target.value,
+    });
+  };
+
+  updateState = (e) => {
+    this.setState({
+      state: e.target.value,
+    });
+  };
+
+  updateZip = (e) => {
+    this.setState({
+      zip: e.target.value,
+    });
+  };
+
+  toggleEdit = (e) => {
+    e.preventDefault();
+    this.setState(
+      (prevState) => ({ edit: !prevState.edit }),
+      () => console.log(this.state)
+    );
   };
 
   render() {
@@ -31,50 +82,53 @@ class ContactInfo extends Component {
       lastName,
       email,
       phone,
-      country,
       address,
       city,
       state,
       zip,
     } = this.state;
 
-    return (
-      <div className="contact-info-container">
-        <form className="edit-view">
-          <h1 className="heading">Contact Information</h1>
-          <DoubleBox
-            title1="First Name"
-            type1="text"
-            id1="firstName"
-            title2="Last Name"
-            type2="text"
-            id2="lastName"
-          />
-          <DoubleBox
-            title1="Email"
-            type1="email"
-            id1="email"
-            title2="Phone"
-            type2="text"
-            id2="phone"
-          />
-          <SingleBox title="Address" type="text" id="address" />
-          <div className="box-container">
-            <HalfBox title="City" type="text" id="city" />
-            <HalfBox title="State" type="text" id="state" />
-            <HalfBox title="Zip Code" type="text" id="zip" />
-          </div>
-          <div className="btn-container-1">
-            <button className="save-btn" type="submit">
-              Save
-            </button>
-            <button className="cancel-btn" type="button">
-              Cancel
-            </button>
-          </div>
-        </form>
-      </div>
-    );
+    const { edit } = this.state;
+    let contactInfo;
+    if (edit) {
+      contactInfo = (
+        <ContactInfoForm
+          updateFirstName={this.updateFirstName}
+          updateLastName={this.updateLastName}
+          updateEmail={this.updateEmail}
+          updatePhone={this.updatePhone}
+          updateAddress={this.updateAddress}
+          updateCity={this.updateCity}
+          updateState={this.updateState}
+          updateZip={this.updateZip}
+          firstName={firstName}
+          lastName={lastName}
+          email={email}
+          phone={phone}
+          address={address}
+          city={city}
+          state={state}
+          zip={zip}
+          submitData={this.toggleEdit}
+        />
+      );
+    } else {
+      contactInfo = (
+        <ContactInfoSubmitted
+          firstName={firstName}
+          lastName={lastName}
+          email={email}
+          phone={phone}
+          address={address}
+          city={city}
+          state={state}
+          zip={zip}
+          toggleEdit={this.toggleEdit}
+        />
+      );
+    }
+
+    return <div className="contact-info-container">{contactInfo}</div>;
   }
 }
 
