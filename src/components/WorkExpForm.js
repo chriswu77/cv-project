@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import '../style.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import DoubleBox from './DoubleBox';
 import SingleBox from './SingleBox';
 import DateBox from './DateBox';
@@ -30,60 +30,109 @@ const WorkExpForm = (props) => {
     updateToYear,
     description,
     updateDescription,
+    edit,
     isNew,
-    addExp,
+    updateState,
   } = props;
 
-  return (
-    <form className="edit-view">
-      <div className="heading" id="work-exp-header">
-        <h1>Work Experience</h1>
-        <FontAwesomeIcon icon={faPlus} className="plus-icon" />
-      </div>
-      <SingleBox
-        title="Job Title"
-        type="text"
-        id="title"
-        update={updateTitle}
-        val={title}
-      />
-      <DoubleBox
-        title1="Company / Organization"
-        type1="text"
-        id1="company"
-        update1={updateCompany}
-        val1={company}
-        title2="Location"
-        type2="text"
-        id2="location"
-        update2={updateLocation}
-        val2={location}
-      />
-      <DateBox
-        text="Leave blank if currently working here"
-        fromMonth={fromMonth}
-        updateFromMonth={updateFromMonth}
-        fromYear={fromYear}
-        updateFromYear={updateFromYear}
-        toMonth={toMonth}
-        updateToMonth={updateToMonth}
-        toYear={toYear}
-        updateToYear={updateToYear}
-      />
-      <div className="description-box">
-        <label htmlFor="description">Description</label>
-        <textarea
-          id="description"
-          name="description"
-          rows="4"
-          cols="50"
-          value={description}
-          onChange={updateDescription}
+  let displayForm;
+
+  if (isNew && edit) {
+    displayForm = (
+      <form className="edit-view" onSubmit={updateState}>
+        <SingleBox
+          title="Job Title"
+          type="text"
+          id="title"
+          update={updateTitle}
+          val={title}
         />
-      </div>
-      <Buttons newStatus={isNew} />
-    </form>
-  );
+        <DoubleBox
+          title1="Company / Organization"
+          type1="text"
+          id1="company"
+          update1={updateCompany}
+          val1={company}
+          title2="Location"
+          type2="text"
+          id2="location"
+          update2={updateLocation}
+          val2={location}
+        />
+        <DateBox
+          text="Leave blank if currently working here"
+          fromMonth={fromMonth}
+          updateFromMonth={updateFromMonth}
+          fromYear={fromYear}
+          updateFromYear={updateFromYear}
+          toMonth={toMonth}
+          updateToMonth={updateToMonth}
+          toYear={toYear}
+          updateToYear={updateToYear}
+        />
+        <div className="description-box">
+          <label htmlFor="description">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            rows="4"
+            cols="50"
+            value={description}
+            onChange={updateDescription}
+          />
+        </div>
+        <Buttons newStatus={isNew} />
+      </form>
+    );
+  } else {
+    displayForm = '';
+  }
+
+  return displayForm;
+  // <form className="edit-view" onSubmit={updateState}>
+  //   <SingleBox
+  //     title="Job Title"
+  //     type="text"
+  //     id="title"
+  //     update={updateTitle}
+  //     val={title}
+  //   />
+  //   <DoubleBox
+  //     title1="Company / Organization"
+  //     type1="text"
+  //     id1="company"
+  //     update1={updateCompany}
+  //     val1={company}
+  //     title2="Location"
+  //     type2="text"
+  //     id2="location"
+  //     update2={updateLocation}
+  //     val2={location}
+  //   />
+  //   <DateBox
+  //     text="Leave blank if currently working here"
+  //     fromMonth={fromMonth}
+  //     updateFromMonth={updateFromMonth}
+  //     fromYear={fromYear}
+  //     updateFromYear={updateFromYear}
+  //     toMonth={toMonth}
+  //     updateToMonth={updateToMonth}
+  //     toYear={toYear}
+  //     updateToYear={updateToYear}
+  //   />
+  //   <div className="description-box">
+  //     <label htmlFor="description">Description</label>
+  //     <textarea
+  //       id="description"
+  //       name="description"
+  //       rows="4"
+  //       cols="50"
+  //       value={description}
+  //       onChange={updateDescription}
+  //     />
+  //   </div>
+  //   <Buttons newStatus={isNew} />
+  // </form>
 };
 
 export default WorkExpForm;

@@ -1,9 +1,9 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import '../style.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import WorkExpForm from './WorkExpForm';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faPlus } from '@fortawesome/free-solid-svg-icons';
 // import DoubleBox from './DoubleBox';
 // import SingleBox from './SingleBox';
 // import DateBox from './DateBox';
@@ -23,7 +23,8 @@ class WorkExp extends Component {
       toYear: 'YYYY',
       description: '',
       edit: false,
-      isNew: true,
+      // isNew: true,
+      newForm: false,
       experiences: [],
     };
   }
@@ -84,7 +85,17 @@ class WorkExp extends Component {
     );
   };
 
-  addExp = () => {
+  toggleNewForm = (e) => {
+    e.preventDefault();
+    this.setState((prevState) => ({
+      newForm: !prevState.newForm,
+      edit: !prevState.edit,
+    }));
+  };
+
+  addExp = (e) => {
+    e.preventDefault();
+
     const experience = {
       title: this.state.title,
       company: this.state.company,
@@ -108,10 +119,10 @@ class WorkExp extends Component {
         toYear: 'YYYY',
         description: '',
         edit: false,
-        isNew: true,
+        newForm: false,
         experiences: prevState.experiences.concat(experience),
       }),
-      console.log(this.state)
+      () => console.log(this.state.experiences)
     );
   };
 
@@ -126,11 +137,29 @@ class WorkExp extends Component {
       toYear,
       description,
       edit,
-      isNew,
+      newForm,
+      experiences,
     } = this.state;
 
     return (
       <div className="work-exp-container">
+        <div className="heading" id="work-exp-header">
+          <h1>Work Experience</h1>
+          <FontAwesomeIcon
+            icon={faPlus}
+            className="plus-icon"
+            onClick={this.toggleNewForm}
+          />
+        </div>
+        {/* 
+        1. add New Work Exp Form component on the top - disable the Add button and the other edit pencil buttons
+        2. add Display Submitted Experiences Component under - loop through the experiences array - assign an editState component to each experience - 
+        3. when submitted task's edit pencil is clicked 
+        - toggle the task's editState 
+        - display Edit Work Exp Form for that task 
+        - also disable the Add New Exp button and other Exp Edit Pencils
+        - the array loop should render itself
+        */}
         <WorkExpForm
           updateTitle={this.updateTitle}
           title={title}
@@ -148,8 +177,9 @@ class WorkExp extends Component {
           updateToYear={this.updateToYear}
           description={description}
           updateDescription={this.updateDescription}
-          isNew={isNew}
-          addExp={this.addExp}
+          edit={edit}
+          isNew={newForm}
+          updateState={this.addExp}
         />
       </div>
     );
