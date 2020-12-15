@@ -33,6 +33,7 @@ const WorkExpForm = (props) => {
     edit,
     isNew,
     updateState,
+    cancelForm,
   } = props;
 
   let displayForm;
@@ -81,7 +82,7 @@ const WorkExpForm = (props) => {
             onChange={updateDescription}
           />
         </div>
-        <Buttons newStatus={isNew} />
+        <Buttons newStatus={isNew} cancel={cancelForm} />
       </form>
     );
   } else {
@@ -89,50 +90,6 @@ const WorkExpForm = (props) => {
   }
 
   return displayForm;
-  // <form className="edit-view" onSubmit={updateState}>
-  //   <SingleBox
-  //     title="Job Title"
-  //     type="text"
-  //     id="title"
-  //     update={updateTitle}
-  //     val={title}
-  //   />
-  //   <DoubleBox
-  //     title1="Company / Organization"
-  //     type1="text"
-  //     id1="company"
-  //     update1={updateCompany}
-  //     val1={company}
-  //     title2="Location"
-  //     type2="text"
-  //     id2="location"
-  //     update2={updateLocation}
-  //     val2={location}
-  //   />
-  //   <DateBox
-  //     text="Leave blank if currently working here"
-  //     fromMonth={fromMonth}
-  //     updateFromMonth={updateFromMonth}
-  //     fromYear={fromYear}
-  //     updateFromYear={updateFromYear}
-  //     toMonth={toMonth}
-  //     updateToMonth={updateToMonth}
-  //     toYear={toYear}
-  //     updateToYear={updateToYear}
-  //   />
-  //   <div className="description-box">
-  //     <label htmlFor="description">Description</label>
-  //     <textarea
-  //       id="description"
-  //       name="description"
-  //       rows="4"
-  //       cols="50"
-  //       value={description}
-  //       onChange={updateDescription}
-  //     />
-  //   </div>
-  //   <Buttons newStatus={isNew} />
-  // </form>
 };
 
 export default WorkExpForm;
