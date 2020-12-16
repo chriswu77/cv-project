@@ -24,6 +24,15 @@ p, h1 {
     flex-direction: column;
 }
 
+.edit-view {
+    border: 1px solid gainsboro;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
 .submitted-line {
     padding: 5px 0;
 }
@@ -118,16 +127,23 @@ label {
 
 .date-dbl-container {
     display: inline-flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     padding-right: 30px;
     padding-bottom: 12px;
 }
 
 .date-single-container {
     display: flex;
+    padding-right: 30px;
+    position: relative;
 }
 
-.year-container, .month-container, .year {
+.notice-text {
+    position: absolute;
+    top: 75px;
+}
+
+.year-container, .month-container {
     display: flex;
     flex-direction: column;
 }
@@ -156,6 +172,7 @@ label {
     flex-direction: column;
     padding-right: 30px;
     padding-bottom: 30px;
+    padding-top: 15px;
 }
 
 #description {
@@ -191,7 +208,7 @@ label {
     font-size: 15px;
     margin-left: 10px;
     margin-top: 1px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .exp-container {

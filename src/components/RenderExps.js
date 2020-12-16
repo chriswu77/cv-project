@@ -2,10 +2,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import '../style.css';
-import uniqid from 'uniqid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
-// eslint-disable-next-line import/no-named-as-default-member
 import WorkExpFormEdit from './WorkExpFormEdit';
 
 const RenderExps = (props) => {
@@ -32,6 +30,7 @@ const RenderExps = (props) => {
     // isNew,
     updateState,
     cancelForm,
+    deleteExp,
   } = props;
 
   const checkEnd = (month, year) => {
@@ -73,6 +72,7 @@ const RenderExps = (props) => {
               //   isNew={isNew}
               updateState={updateState}
               cancelForm={cancelForm}
+              deleteExp={deleteExp}
               key={exp.id}
             />
           );
@@ -81,11 +81,13 @@ const RenderExps = (props) => {
           <div key={exp.id} id={exp.id} className="exp-container">
             <div className="exp-header-container">
               <p className="exp-title submitted-line">{header}</p>
-              <FontAwesomeIcon
-                icon={faEdit}
-                className="exp-pencil submitted-line"
-                onClick={toggleEditState}
-              />
+              <div className="icon-wrapper">
+                <FontAwesomeIcon
+                  icon={faEdit}
+                  className="exp-pencil submitted-line"
+                  onClick={toggleEditState}
+                />
+              </div>
             </div>
             <p className="submitted-line">{exp.location}</p>
             <p className="submitted-line">{duration}</p>

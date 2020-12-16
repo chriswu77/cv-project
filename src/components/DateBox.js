@@ -68,19 +68,17 @@ const DateBox = (props) => {
           </select>
         </div>
         <div className="year-container">
-          <div className="year">
-            <label htmlFor="from-year">Year(YYYY)</label>
-            <input
-              type="number"
-              min="1900"
-              max="2099"
-              step="1"
-              placeholder="YYYY"
-              id="from-year"
-              value={fromYear}
-              onChange={updateFromYear}
-            />
-          </div>
+          <label htmlFor="from-year">Year(YYYY)</label>
+          <input
+            type="number"
+            min="1900"
+            max="2099"
+            step="1"
+            placeholder="YYYY"
+            id="from-year"
+            value={fromYear}
+            onChange={updateFromYear}
+          />
         </div>
       </div>
       <div className="date-single-container">
@@ -134,21 +132,19 @@ const DateBox = (props) => {
           </select>
         </div>
         <div className="year-container">
-          <div className="year">
-            <label htmlFor="to-year">Year(YYYY)</label>
-            <input
-              type="number"
-              min="1900"
-              max="2099"
-              step="1"
-              placeholder="YYYY"
-              id="to-year"
-              value={toYear}
-              onChange={updateToYear}
-            />
-          </div>
-          <p className="notice-text">{text}</p>
+          <label htmlFor="to-year">Year(YYYY)</label>
+          <input
+            type="number"
+            min="1900"
+            max="2099"
+            step="1"
+            placeholder="YYYY"
+            id="to-year"
+            value={toYear}
+            onChange={updateToYear}
+          />
         </div>
+        <p className="notice-text">{text}</p>
       </div>
     </div>
   );

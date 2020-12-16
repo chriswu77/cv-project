@@ -1,3 +1,4 @@
+/* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
@@ -82,8 +83,23 @@ class WorkExp extends Component {
     });
   };
 
+  resetStateVals = () => {
+    this.setState({
+      title: '',
+      company: '',
+      location: '',
+      fromMonth: '',
+      fromYear: '',
+      toMonth: '',
+      toYear: '',
+      description: '',
+      edit: false,
+      newForm: false,
+    });
+  };
+
   toggleEditState = (e) => {
-    const icon = e.target.closest('.exp-pencil');
+    const icon = e.target.closest('.icon-wrapper');
     if (icon) {
       const id = icon.parentElement.parentElement.id;
       const copyArr = [...this.state.experiences];
@@ -97,7 +113,27 @@ class WorkExp extends Component {
       );
 
       this.updateStateVals(selectedExp);
+      this.disableBtns();
     }
+  };
+
+  cancelEdit = (id) => {
+    const copyArr = [...this.state.experiences];
+    const index = copyArr.findIndex((exp) => exp.id === id);
+    const selectedExp = copyArr[index];
+    selectedExp.editState = false;
+
+    this.resetStateVals();
+    this.setState({ experiences: copyArr });
+    this.enableBtns();
+  };
+
+  deleteExp = (id) => {
+    this.resetStateVals();
+    this.setState({
+      experiences: this.state.experiences.filter((exp) => exp.id !== id),
+    });
+    this.enableBtns();
   };
 
   submitEditChanges = (e, id) => {
@@ -105,8 +141,6 @@ class WorkExp extends Component {
     const copyArr = [...this.state.experiences];
     const index = copyArr.findIndex((exp) => exp.id === id);
     const selectedExp = copyArr[index];
-
-    console.log(id);
 
     selectedExp.title = this.state.title;
     selectedExp.company = this.state.company;
@@ -118,10 +152,9 @@ class WorkExp extends Component {
     selectedExp.description = this.state.description;
     selectedExp.editState = false;
 
-    this.setState(
-      (prevState) => ({ edit: !prevState.edit, experiences: copyArr }),
-      () => console.log(this.state)
-    );
+    this.resetStateVals();
+    this.setState({ experiences: copyArr });
+    this.enableBtns();
   };
 
   toggleNewForm = (e) => {
@@ -135,28 +168,37 @@ class WorkExp extends Component {
   };
 
   disableBtns = () => {
-    document.querySelector('.icon-wrapper').classList.add('disable-cursor');
+    const cursorWrappers = Array.from(
+      document.querySelectorAll('.icon-wrapper')
+    );
+    cursorWrappers.forEach((wrapper) =>
+      wrapper.classList.add('disable-cursor')
+    );
+    // document.querySelector('.icon-wrapper').classList.add('disable-cursor');
     document.querySelector('.plus-icon').classList.add('disable');
+
+    const editPencils = Array.from(document.querySelectorAll('.exp-pencil'));
+    editPencils.forEach((pencil) => pencil.classList.add('disable'));
   };
 
   enableBtns = () => {
-    document.querySelector('.icon-wrapper').classList.remove('disable-cursor');
+    const cursorWrappers = Array.from(
+      document.querySelectorAll('.icon-wrapper')
+    );
+    cursorWrappers.forEach((wrapper) =>
+      wrapper.classList.remove('disable-cursor')
+    );
+    // document.querySelector('.icon-wrapper').classList.remove('disable-cursor');
     document.querySelector('.plus-icon').classList.remove('disable');
+
+    const editPencils = Array.from(document.querySelectorAll('.exp-pencil'));
+    editPencils.forEach((pencil) => pencil.classList.remove('disable'));
   };
 
   cancelNewform = () => {
-    this.setState({
-      title: '',
-      company: '',
-      location: '',
-      fromMonth: '',
-      fromYear: '',
-      toMonth: '',
-      toYear: '',
-      description: '',
-      edit: false,
-      newForm: false,
-    });
+    this.resetStateVals();
+
+    this.setState({ newForm: false });
 
     this.enableBtns();
   };
@@ -179,12 +221,12 @@ class WorkExp extends Component {
 
     this.cancelNewform();
 
-    this.setState(
-      (prevState) => ({
-        experiences: prevState.experiences.concat(experience),
-      }),
-      () => console.log(this.state)
-    );
+    const copy = [...this.state.experiences];
+    copy.unshift(experience);
+
+    this.setState({
+      experiences: copy,
+    });
   };
 
   updateStateVals = (exp) => {
@@ -280,7 +322,8 @@ class WorkExp extends Component {
           // edit={edit}
           // isNew={newForm}
           updateState={this.submitEditChanges}
-          cancelForm={this.cancelNewform}
+          cancelForm={this.cancelEdit}
+          deleteExp={this.deleteExp}
         />
       </div>
     );

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Buttons = (props) => {
-  const { newStatus, cancel } = props;
+  const { newStatus, cancel, id, deleteExp } = props;
 
   let btn;
 
@@ -26,11 +26,19 @@ const Buttons = (props) => {
           <button type="submit" className="save-btn">
             Save
           </button>
-          <button type="button" className="cancel-btn" onClick={cancel}>
+          <button
+            type="button"
+            className="cancel-btn"
+            onClick={() => cancel(id)}
+          >
             Cancel
           </button>
         </div>
-        <button type="button" className="trash-btn">
+        <button
+          type="button"
+          className="trash-btn"
+          onClick={() => deleteExp(id)}
+        >
           <FontAwesomeIcon icon={faTrashAlt} className="trash-icon" />
           Delete
         </button>

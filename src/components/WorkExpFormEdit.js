@@ -34,6 +34,7 @@ const WorkExpFormEdit = (props) => {
     updateDescription,
     updateState,
     cancelForm,
+    deleteExp,
   } = props;
 
   return (
@@ -79,7 +80,12 @@ const WorkExpFormEdit = (props) => {
           onChange={updateDescription}
         />
       </div>
-      <Buttons newStatus={false} cancel={cancelForm} />
+      <Buttons
+        newStatus={false}
+        cancel={cancelForm}
+        id={exp.id}
+        deleteExp={deleteExp}
+      />
     </form>
   );
 };
