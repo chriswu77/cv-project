@@ -29,7 +29,8 @@ p, h1 {
     border-top: none;
     border-left: none;
     border-right: none;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
+    padding: 15px 0;
     width: 100%;
 }
 
@@ -50,7 +51,7 @@ p, h1 {
 }
 
 label {
-    font-size: 20px;
+    font-size: 15px;
     padding-bottom: 5px;
 }
 
@@ -78,12 +79,14 @@ label {
 }
 
 .form {
-    font-size: 20px;
-    padding: 8px 10px;
+    font-size: 15px;
+    /* padding: 8px 10px; */
+    padding: 6px 12px;
 }
 
 .single-form {
-    width: 655px;
+    /* width: 655px; */
+    width: 515px;
 }
 
 .save-btn {
@@ -113,9 +116,9 @@ label {
 }
 
 .react-tel-input .form-control {
-    height: 43px !important;
-	width: 324px !important;
-    font-size: 20px !important;
+    height: 33px !important;
+	width: 328px !important;
+    font-size: 15px !important;
 }
 
 .edit-icon {
@@ -140,7 +143,8 @@ label {
 
 .notice-text {
     position: absolute;
-    top: 75px;
+    top: 60px;
+    font-size: 13px;
 }
 
 .year-container, .month-container {
@@ -149,18 +153,18 @@ label {
 }
 
 #from-month-dropdown, #to-month-dropdown, #from-year, #to-year {
-    font-size: 20px;
+    font-size: 15px;
 }
 
 #from-month-dropdown, #to-month-dropdown {
-    height: 43px;
+    height: 33px;
     padding: 0px 0px 0px 5px;
 }
 
 #from-year, #to-year {
     padding: 0px 0px 0px 5px;
     margin: 0;
-    height: 39px;
+    height: 29px;
 }
 
 .month-container {
@@ -170,19 +174,23 @@ label {
 .description-box {
     display: flex;
     flex-direction: column;
-    padding-right: 30px;
-    padding-bottom: 30px;
-    padding-top: 15px;
+    /* padding-right: 30px; */
+    /* padding-bottom: 30px; */
+    padding-top: 18px;
 }
 
 #description {
     font-family: 'Roboto', sans-serif; 
-    font-size: 20px;
+    font-size: 15px;
     padding: 10px;
 }
 
 .header, #work-exp-header, .btn-container, .edit-btn-container, .exp-header-container {
     display: flex;
+}
+
+.btn-container, .edit-btn-container {
+    padding-top: 18px;
 }
 
 .edit-btn-container {
