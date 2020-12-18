@@ -2,7 +2,7 @@
 import React from 'react';
 
 const SingleBox = (props) => {
-  const { title, type, id, update, val } = props;
+  const { title, type, id, update, val, err } = props;
 
   return (
     <div className="single-box">
@@ -14,6 +14,7 @@ const SingleBox = (props) => {
         value={val}
         onChange={update}
       />
+      <p className="form-error">{err}</p>
     </div>
   );
 };

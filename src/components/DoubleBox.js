@@ -12,11 +12,13 @@ const DoubleBox = (props) => {
     id1,
     update1,
     val1,
+    err1,
     title2,
     type2,
     id2,
     update2,
     val2,
+    err2,
   } = props;
 
   let secondBox;
@@ -26,6 +28,7 @@ const DoubleBox = (props) => {
       <div className="half-box">
         <label htmlFor={id2}>{title2}</label>
         <PhoneInput country={'us'} value={val2} onChange={update2} />
+        <p className="form-error">{err2}</p>
       </div>
     );
   } else {
@@ -36,6 +39,7 @@ const DoubleBox = (props) => {
         id={id2}
         update={update2}
         val={val2}
+        err={err2}
       />
     );
   }
@@ -48,6 +52,7 @@ const DoubleBox = (props) => {
         id={id1}
         update={update1}
         val={val1}
+        err={err1}
       />
       {secondBox}
     </div>

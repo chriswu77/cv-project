@@ -2,7 +2,7 @@
 import React from 'react';
 
 const HalfBox = (props) => {
-  const { title, type, id, update, val } = props;
+  const { title, type, id, update, val, err } = props;
 
   return (
     <div className="half-box">
@@ -14,6 +14,7 @@ const HalfBox = (props) => {
         value={val}
         onChange={update}
       />
+      <p className="form-error">{err}</p>
     </div>
   );
 };

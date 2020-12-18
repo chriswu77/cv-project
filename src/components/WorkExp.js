@@ -174,8 +174,9 @@ class WorkExp extends Component {
     cursorWrappers.forEach((wrapper) =>
       wrapper.classList.add('disable-cursor')
     );
-    // document.querySelector('.icon-wrapper').classList.add('disable-cursor');
-    document.querySelector('.plus-icon').classList.add('disable');
+
+    const addIcons = Array.from(document.querySelectorAll('.plus-icon'));
+    addIcons.forEach((plus) => plus.classList.add('disable'));
 
     const editPencils = Array.from(document.querySelectorAll('.exp-pencil'));
     editPencils.forEach((pencil) => pencil.classList.add('disable'));
@@ -188,8 +189,9 @@ class WorkExp extends Component {
     cursorWrappers.forEach((wrapper) =>
       wrapper.classList.remove('disable-cursor')
     );
-    // document.querySelector('.icon-wrapper').classList.remove('disable-cursor');
-    document.querySelector('.plus-icon').classList.remove('disable');
+
+    const addIcons = Array.from(document.querySelectorAll('.plus-icon'));
+    addIcons.forEach((plus) => plus.classList.remove('disable'));
 
     const editPencils = Array.from(document.querySelectorAll('.exp-pencil'));
     editPencils.forEach((pencil) => pencil.classList.remove('disable'));

@@ -58,7 +58,7 @@ label {
 .box-container {
     display: flex;
     /* justify-content: space-between; */
-    padding-bottom: 30px;
+    padding-bottom: 25px;
 }
 
 .half-box, .single-box {
@@ -71,7 +71,7 @@ label {
 }
 
 .single-box {
-    padding-bottom: 30px;
+    padding-bottom: 25px;
 }
 
 .half-form {
@@ -235,4 +235,19 @@ label {
 .disable {
     color: grey;
     pointer-events: none;
+}
+
+.form-error {
+    font-size: 13px;
+    color: red;
+    padding-top: 5px;
+}
+
+input:invalid {
+    background-color: #ffdddd;
+}
+
+.invalid {
+    background-color: #ffdddd !important;
+    border-color: #c00000 !important;
 }

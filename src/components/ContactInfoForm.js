@@ -24,6 +24,14 @@ const ContactInfoForm = (props) => {
     state,
     zip,
     submitData,
+    firstNameError,
+    lastNameError,
+    emailError,
+    phoneError,
+    addressError,
+    cityError,
+    stateError,
+    zipError,
   } = props;
 
   return (
@@ -35,11 +43,13 @@ const ContactInfoForm = (props) => {
         id1="firstName"
         update1={updateFirstName}
         val1={firstName}
+        err1={firstNameError}
         title2="Last Name"
         type2="text"
         id2="lastName"
         update2={updateLastName}
         val2={lastName}
+        err2={lastNameError}
       />
       <DoubleBox
         title1="Email"
@@ -47,11 +57,13 @@ const ContactInfoForm = (props) => {
         id1="email"
         update1={updateEmail}
         val1={email}
+        err1={emailError}
         title2="Phone"
         type2="tel"
         id2="phone"
         update2={updatePhone}
         val2={phone}
+        err2={phoneError}
       />
       <SingleBox
         title="Address"
@@ -59,6 +71,7 @@ const ContactInfoForm = (props) => {
         id="address"
         update={updateAddress}
         val={address}
+        err={addressError}
       />
       <div className="box-container">
         <HalfBox
@@ -67,6 +80,7 @@ const ContactInfoForm = (props) => {
           id="city"
           update={updateCity}
           val={city}
+          err={cityError}
         />
         <HalfBox
           title="State"
@@ -74,6 +88,7 @@ const ContactInfoForm = (props) => {
           id="state"
           update={updateState}
           val={state}
+          err={stateError}
         />
         <HalfBox
           title="Zip Code"
@@ -81,15 +96,13 @@ const ContactInfoForm = (props) => {
           id="zip"
           update={updateZip}
           val={zip}
+          err={zipError}
         />
       </div>
       <div className="btn-container-1">
         <button className="save-btn" type="submit">
           Save
         </button>
-        {/* <button className="cancel-btn" type="button">
-          Cancel
-        </button> */}
       </div>
     </form>
   );
