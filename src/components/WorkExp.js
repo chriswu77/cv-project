@@ -93,11 +93,6 @@ class WorkExp extends Component {
       toMonth: '',
       toYear: '',
       description: '',
-      titleError: '',
-      companyError: '',
-      locationError: '',
-      fromMonthError: '',
-      fromYearError: '',
       edit: false,
       newForm: false,
     });
@@ -112,10 +107,10 @@ class WorkExp extends Component {
       const selectedExp = copyArr[index];
       selectedExp.editState = true;
 
-      this.setState(
-        (prevState) => ({ edit: !prevState.edit, experiences: copyArr }),
-        () => console.log(this.state)
-      );
+      this.setState((prevState) => ({
+        edit: !prevState.edit,
+        experiences: copyArr,
+      }));
 
       this.updateStateVals(selectedExp);
       this.disableBtns();

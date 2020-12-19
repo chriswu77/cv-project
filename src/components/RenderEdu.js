@@ -29,6 +29,11 @@ const RenderEdu = (props) => {
     updateState,
     cancelForm,
     deleteEdu,
+    schoolError,
+    degreeError,
+    majorError,
+    fromMonthError,
+    fromYearError,
   } = props;
 
   const checkEnd = (month, year) => {
@@ -78,6 +83,11 @@ const RenderEdu = (props) => {
               updateState={updateState}
               cancelForm={cancelForm}
               deleteEdu={deleteEdu}
+              schoolError={schoolError}
+              degreeError={degreeError}
+              majorError={majorError}
+              fromMonthError={fromMonthError}
+              fromYearError={fromYearError}
               key={edu.id}
             />
           );

@@ -28,6 +28,11 @@ const EducationForm = (props) => {
     isNew,
     updateState,
     cancelForm,
+    schoolError,
+    degreeError,
+    majorError,
+    fromMonthError,
+    fromYearError,
   } = props;
 
   let displayForm;
@@ -41,6 +46,7 @@ const EducationForm = (props) => {
           id="school"
           update={updateSchool}
           val={school}
+          err={schoolError}
         />
         <SingleBox
           title="Level of Education / Degree"
@@ -48,6 +54,7 @@ const EducationForm = (props) => {
           id="degree"
           update={updateDegree}
           val={degree}
+          err={degreeError}
         />
         <DoubleBox
           title1="Major"
@@ -55,6 +62,7 @@ const EducationForm = (props) => {
           id1="major"
           update1={updateMajor}
           val1={major}
+          err1={majorError}
           title2="Minor"
           type2="text"
           id2="minor"
@@ -71,6 +79,8 @@ const EducationForm = (props) => {
           updateToMonth={updateToMonth}
           toYear={toYear}
           updateToYear={updateToYear}
+          fromMonthError={fromMonthError}
+          fromYearError={fromYearError}
         />
         <Buttons newStatus={isNew} cancel={cancelForm} />
       </form>

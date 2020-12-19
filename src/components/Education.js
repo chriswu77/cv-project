@@ -24,6 +24,11 @@ class Education extends Component {
       fromYear: '',
       toMonth: '',
       toYear: '',
+      schoolError: '',
+      degreeError: '',
+      majorError: '',
+      fromMonthError: '',
+      fromYearError: '',
       edit: false,
       newForm: false,
       educations: [],
@@ -102,10 +107,10 @@ class Education extends Component {
       const selectedEdu = copyArr[index];
       selectedEdu.editState = true;
 
-      this.setState(
-        (prevState) => ({ edit: !prevState.edit, educations: copyArr }),
-        () => console.log(this.state)
-      );
+      this.setState((prevState) => ({
+        edit: !prevState.edit,
+        educations: copyArr,
+      }));
 
       this.updateStateVals(selectedEdu);
       this.disableBtns();
@@ -121,6 +126,7 @@ class Education extends Component {
     this.resetStateVals();
     this.setState({ educations: copyArr });
     this.enableBtns();
+    this.resetErrors();
   };
 
   deleteEdu = (id) => {
@@ -129,27 +135,34 @@ class Education extends Component {
       educations: this.state.educations.filter((edu) => edu.id !== id),
     });
     this.enableBtns();
+    this.resetErrors();
   };
 
   submitEditChanges = (e, id) => {
     e.preventDefault();
-    const copyArr = [...this.state.educations];
-    const index = copyArr.findIndex((edu) => edu.id === id);
-    const selectedEdu = copyArr[index];
 
-    selectedEdu.school = this.state.school;
-    selectedEdu.degree = this.state.degree;
-    selectedEdu.major = this.state.major;
-    selectedEdu.minor = this.state.minor;
-    selectedEdu.fromMonth = this.state.fromMonth;
-    selectedEdu.fromYear = this.state.fromYear;
-    selectedEdu.toMonth = this.state.toMonth;
-    selectedEdu.toYear = this.state.toYear;
-    selectedEdu.editState = false;
+    const isValid = this.validateForm();
 
-    this.resetStateVals();
-    this.setState({ educations: copyArr });
-    this.enableBtns();
+    if (isValid) {
+      const copyArr = [...this.state.educations];
+      const index = copyArr.findIndex((edu) => edu.id === id);
+      const selectedEdu = copyArr[index];
+
+      selectedEdu.school = this.state.school;
+      selectedEdu.degree = this.state.degree;
+      selectedEdu.major = this.state.major;
+      selectedEdu.minor = this.state.minor;
+      selectedEdu.fromMonth = this.state.fromMonth;
+      selectedEdu.fromYear = this.state.fromYear;
+      selectedEdu.toMonth = this.state.toMonth;
+      selectedEdu.toYear = this.state.toYear;
+      selectedEdu.editState = false;
+
+      this.resetStateVals();
+      this.setState({ educations: copyArr });
+      this.enableBtns();
+      this.resetErrors();
+    }
   };
 
   toggleNewForm = () => {
@@ -197,32 +210,37 @@ class Education extends Component {
     this.setState({ newForm: false });
 
     this.enableBtns();
+    this.resetErrors();
   };
 
   addEdu = (e) => {
     e.preventDefault();
 
-    const education = {
-      id: uniqid(),
-      school: this.state.school,
-      degree: this.state.degree,
-      major: this.state.major,
-      minor: this.state.minor,
-      fromMonth: this.state.fromMonth,
-      fromYear: this.state.fromYear,
-      toMonth: this.state.toMonth,
-      toYear: this.state.toYear,
-      editState: false,
-    };
+    const isValid = this.validateForm();
 
-    this.cancelNewform();
+    if (isValid) {
+      const education = {
+        id: uniqid(),
+        school: this.state.school,
+        degree: this.state.degree,
+        major: this.state.major,
+        minor: this.state.minor,
+        fromMonth: this.state.fromMonth,
+        fromYear: this.state.fromYear,
+        toMonth: this.state.toMonth,
+        toYear: this.state.toYear,
+        editState: false,
+      };
 
-    const copy = [...this.state.educations];
-    copy.unshift(education);
+      this.cancelNewform();
 
-    this.setState({
-      educations: copy,
-    });
+      const copy = [...this.state.educations];
+      copy.unshift(education);
+
+      this.setState({
+        educations: copy,
+      });
+    }
   };
 
   updateStateVals = (edu) => {
@@ -238,6 +256,69 @@ class Education extends Component {
     });
   };
 
+  validateForm = () => {
+    let schoolError = '';
+    let degreeError = '';
+    let majorError = '';
+    let fromMonthError = '';
+    let fromYearError = '';
+
+    const requiredText = 'This field is required';
+
+    if (this.state.school === '') {
+      schoolError = requiredText;
+      this.setState({ schoolError });
+      document.querySelector('#school').classList.add('invalid');
+      return false;
+    }
+
+    if (this.state.degree === '') {
+      degreeError = requiredText;
+      this.setState({ degreeError });
+      document.querySelector('#degree').classList.add('invalid');
+      return false;
+    }
+
+    if (this.state.major === '') {
+      majorError = requiredText;
+      this.setState({ majorError });
+      document.querySelector('#major').classList.add('invalid');
+      return false;
+    }
+
+    if (this.state.fromMonth === '') {
+      fromMonthError = 'required';
+      this.setState({ fromMonthError });
+      document.querySelector('#from-month-dropdown').classList.add('invalid');
+      return false;
+    }
+
+    if (this.state.fromYear === '') {
+      fromYearError = 'required';
+      this.setState({ fromYearError });
+      document.querySelector('#from-year').classList.add('invalid');
+      return false;
+    }
+
+    return true;
+  };
+
+  resetErrors = () => {
+    this.setState({
+      schoolError: '',
+      degreeError: '',
+      majorError: '',
+      fromMonthError: '',
+      fromYearError: '',
+    });
+
+    document.querySelector('#school').classList.remove('invalid');
+    document.querySelector('#degree').classList.remove('invalid');
+    document.querySelector('#major').classList.remove('invalid');
+    document.querySelector('#from-month-dropdown').classList.remove('invalid');
+    document.querySelector('#from-year').classList.remove('invalid');
+  };
+
   render() {
     const {
       school,
@@ -248,6 +329,11 @@ class Education extends Component {
       fromYear,
       toMonth,
       toYear,
+      schoolError,
+      degreeError,
+      majorError,
+      fromMonthError,
+      fromYearError,
       edit,
       newForm,
       educations,
@@ -286,6 +372,11 @@ class Education extends Component {
           isNew={newForm}
           updateState={this.addEdu}
           cancelForm={this.cancelNewform}
+          schoolError={schoolError}
+          degreeError={degreeError}
+          majorError={majorError}
+          fromMonthError={fromMonthError}
+          fromYearError={fromYearError}
         />
         <RenderEdu
           educations={educations}
@@ -309,6 +400,11 @@ class Education extends Component {
           updateState={this.submitEditChanges}
           cancelForm={this.cancelEdit}
           deleteEdu={this.deleteEdu}
+          schoolError={schoolError}
+          degreeError={degreeError}
+          majorError={majorError}
+          fromMonthError={fromMonthError}
+          fromYearError={fromYearError}
         />
       </div>
     );
