@@ -13,6 +13,8 @@ const DateBox = (props) => {
     updateToMonth,
     toYear,
     updateToYear,
+    fromMonthError,
+    fromYearError,
   } = props;
 
   return (
@@ -22,7 +24,6 @@ const DateBox = (props) => {
           <label htmlFor="from-month-dropdown">From Month</label>
           <select
             id="from-month-dropdown"
-            // defaultValue=""
             value={fromMonth}
             onChange={updateFromMonth}
           >
@@ -66,6 +67,7 @@ const DateBox = (props) => {
               December
             </option>
           </select>
+          <p className="form-error">{fromMonthError}</p>
         </div>
         <div className="year-container">
           <label htmlFor="from-year">Year(YYYY)</label>
@@ -79,6 +81,7 @@ const DateBox = (props) => {
             value={fromYear}
             onChange={updateFromYear}
           />
+          <p className="form-error">{fromYearError}</p>
         </div>
       </div>
       <div className="date-single-container">
@@ -86,7 +89,6 @@ const DateBox = (props) => {
           <label htmlFor="to-month-dropdown">To Month</label>
           <select
             id="to-month-dropdown"
-            // defaultValue=""
             value={toMonth}
             onChange={updateToMonth}
           >

@@ -10,10 +10,6 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import uniqid from 'uniqid';
 import WorkExpForm from './WorkExpForm';
 import RenderExps from './RenderExps';
-// import DoubleBox from './DoubleBox';
-// import SingleBox from './SingleBox';
-// import DateBox from './DateBox';
-// import Buttons from './Buttons';
 
 class WorkExp extends Component {
   constructor() {
@@ -28,8 +24,12 @@ class WorkExp extends Component {
       toMonth: '',
       toYear: '',
       description: '',
+      titleError: '',
+      companyError: '',
+      locationError: '',
+      fromMonthError: '',
+      fromYearError: '',
       edit: false,
-      // isNew: true,
       newForm: false,
       experiences: [],
     };
@@ -93,6 +93,11 @@ class WorkExp extends Component {
       toMonth: '',
       toYear: '',
       description: '',
+      titleError: '',
+      companyError: '',
+      locationError: '',
+      fromMonthError: '',
+      fromYearError: '',
       edit: false,
       newForm: false,
     });
@@ -126,6 +131,7 @@ class WorkExp extends Component {
     this.resetStateVals();
     this.setState({ experiences: copyArr });
     this.enableBtns();
+    this.resetErrors();
   };
 
   deleteExp = (id) => {
@@ -134,27 +140,34 @@ class WorkExp extends Component {
       experiences: this.state.experiences.filter((exp) => exp.id !== id),
     });
     this.enableBtns();
+    this.resetErrors();
   };
 
   submitEditChanges = (e, id) => {
     e.preventDefault();
-    const copyArr = [...this.state.experiences];
-    const index = copyArr.findIndex((exp) => exp.id === id);
-    const selectedExp = copyArr[index];
 
-    selectedExp.title = this.state.title;
-    selectedExp.company = this.state.company;
-    selectedExp.location = this.state.location;
-    selectedExp.fromMonth = this.state.fromMonth;
-    selectedExp.fromYear = this.state.fromYear;
-    selectedExp.toMonth = this.state.toMonth;
-    selectedExp.toYear = this.state.toYear;
-    selectedExp.description = this.state.description;
-    selectedExp.editState = false;
+    const isValid = this.validateForm();
 
-    this.resetStateVals();
-    this.setState({ experiences: copyArr });
-    this.enableBtns();
+    if (isValid) {
+      const copyArr = [...this.state.experiences];
+      const index = copyArr.findIndex((exp) => exp.id === id);
+      const selectedExp = copyArr[index];
+
+      selectedExp.title = this.state.title;
+      selectedExp.company = this.state.company;
+      selectedExp.location = this.state.location;
+      selectedExp.fromMonth = this.state.fromMonth;
+      selectedExp.fromYear = this.state.fromYear;
+      selectedExp.toMonth = this.state.toMonth;
+      selectedExp.toYear = this.state.toYear;
+      selectedExp.description = this.state.description;
+      selectedExp.editState = false;
+
+      this.resetStateVals();
+      this.setState({ experiences: copyArr });
+      this.enableBtns();
+      this.resetErrors();
+    }
   };
 
   toggleNewForm = (e) => {
@@ -203,32 +216,36 @@ class WorkExp extends Component {
     this.setState({ newForm: false });
 
     this.enableBtns();
+    this.resetErrors();
   };
 
   addExp = (e) => {
     e.preventDefault();
+    const isValid = this.validateForm();
 
-    const experience = {
-      id: uniqid(),
-      title: this.state.title,
-      company: this.state.company,
-      location: this.state.location,
-      fromMonth: this.state.fromMonth,
-      fromYear: this.state.fromYear,
-      toMonth: this.state.toMonth,
-      toYear: this.state.toYear,
-      description: this.state.description,
-      editState: false,
-    };
+    if (isValid) {
+      const experience = {
+        id: uniqid(),
+        title: this.state.title,
+        company: this.state.company,
+        location: this.state.location,
+        fromMonth: this.state.fromMonth,
+        fromYear: this.state.fromYear,
+        toMonth: this.state.toMonth,
+        toYear: this.state.toYear,
+        description: this.state.description,
+        editState: false,
+      };
 
-    this.cancelNewform();
+      this.cancelNewform();
 
-    const copy = [...this.state.experiences];
-    copy.unshift(experience);
+      const copy = [...this.state.experiences];
+      copy.unshift(experience);
 
-    this.setState({
-      experiences: copy,
-    });
+      this.setState({
+        experiences: copy,
+      });
+    }
   };
 
   updateStateVals = (exp) => {
@@ -244,6 +261,69 @@ class WorkExp extends Component {
     });
   };
 
+  validateForm = () => {
+    let titleError = '';
+    let companyError = '';
+    let locationError = '';
+    let fromMonthError = '';
+    let fromYearError = '';
+
+    const requiredText = 'This field is required';
+
+    if (this.state.title === '') {
+      titleError = requiredText;
+      this.setState({ titleError });
+      document.querySelector('#title').classList.add('invalid');
+      return false;
+    }
+
+    if (this.state.company === '') {
+      companyError = requiredText;
+      this.setState({ companyError });
+      document.querySelector('#company').classList.add('invalid');
+      return false;
+    }
+
+    if (this.state.location === '') {
+      locationError = requiredText;
+      this.setState({ locationError });
+      document.querySelector('#location').classList.add('invalid');
+      return false;
+    }
+
+    if (this.state.fromMonth === '') {
+      fromMonthError = 'required';
+      this.setState({ fromMonthError });
+      document.querySelector('#from-month-dropdown').classList.add('invalid');
+      return false;
+    }
+
+    if (this.state.fromYear === '') {
+      fromYearError = 'required';
+      this.setState({ fromYearError });
+      document.querySelector('#from-year').classList.add('invalid');
+      return false;
+    }
+
+    return true;
+  };
+
+  resetErrors = () => {
+    this.setState({
+      titleError: '',
+      companyError: '',
+      locationError: '',
+      fromMonthError: '',
+      fromYearError: '',
+    });
+
+    document.querySelector('#title').classList.remove('invalid');
+    document.querySelector('#company').classList.remove('invalid');
+    document.querySelector('#location').classList.remove('invalid');
+    document.querySelector('#from-month-dropdown').classList.remove('invalid');
+    document.querySelector('#from-year').classList.remove('invalid');
+  };
+
   render() {
     const {
       title,
@@ -254,6 +334,11 @@ class WorkExp extends Component {
       toMonth,
       toYear,
       description,
+      titleError,
+      companyError,
+      locationError,
+      fromMonthError,
+      fromYearError,
       edit,
       newForm,
       experiences,
@@ -271,15 +356,6 @@ class WorkExp extends Component {
             />
           </div>
         </div>
-        {/* 
-        1. add New Work Exp Form component on the top - disable the Add button and the other edit pencil buttons
-        2. add Display Submitted Experiences Component under - loop through the experiences array - assign an editState component to each experience - 
-        3. when submitted task's edit pencil is clicked 
-        - toggle the task's editState 
-        - display Edit Work Exp Form for that task 
-        - also disable the Add New Exp button and other Exp Edit Pencils
-        - the array loop should render itself
-        */}
         <WorkExpForm
           updateTitle={this.updateTitle}
           title={title}
@@ -301,6 +377,11 @@ class WorkExp extends Component {
           isNew={newForm}
           updateState={this.addExp}
           cancelForm={this.cancelNewform}
+          titleError={titleError}
+          companyError={companyError}
+          locationError={locationError}
+          fromMonthError={fromMonthError}
+          fromYearError={fromYearError}
         />
         <RenderExps
           experiences={experiences}
@@ -321,11 +402,14 @@ class WorkExp extends Component {
           updateToYear={this.updateToYear}
           description={description}
           updateDescription={this.updateDescription}
-          // edit={edit}
-          // isNew={newForm}
           updateState={this.submitEditChanges}
           cancelForm={this.cancelEdit}
           deleteExp={this.deleteExp}
+          titleError={titleError}
+          companyError={companyError}
+          locationError={locationError}
+          fromMonthError={fromMonthError}
+          fromYearError={fromYearError}
         />
       </div>
     );

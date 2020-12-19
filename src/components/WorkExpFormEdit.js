@@ -1,17 +1,10 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import '../style.css';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faPlus } from '@fortawesome/free-solid-svg-icons';
-// import uniqid from 'uniqid';
 import DoubleBox from './DoubleBox';
 import SingleBox from './SingleBox';
 import DateBox from './DateBox';
 import Buttons from './Buttons';
-
-// need two form versions
-// version 1 - fresh form - eventlistener on + button - can use all the state.values when they're blank/reset. btns based on state.newStatus = true (change to state.createNewForm?)
-// version 2 - edit form - eventlistener on pencil - pass in experiences array from state - access the data values for the specific experience - set the values to the stored values
 
 const WorkExpFormEdit = (props) => {
   const {
@@ -35,6 +28,11 @@ const WorkExpFormEdit = (props) => {
     updateState,
     cancelForm,
     deleteExp,
+    titleError,
+    companyError,
+    locationError,
+    fromMonthError,
+    fromYearError,
   } = props;
 
   return (
@@ -45,6 +43,7 @@ const WorkExpFormEdit = (props) => {
         id="title"
         update={updateTitle}
         val={title}
+        err={titleError}
       />
       <DoubleBox
         title1="Company / Organization"
@@ -52,11 +51,13 @@ const WorkExpFormEdit = (props) => {
         id1="company"
         update1={updateCompany}
         val1={company}
+        err1={companyError}
         title2="Location"
         type2="text"
         id2="location"
         update2={updateLocation}
         val2={location}
+        err2={locationError}
       />
       <DateBox
         text="Leave blank if currently working here"
@@ -68,6 +69,8 @@ const WorkExpFormEdit = (props) => {
         updateToMonth={updateToMonth}
         toYear={toYear}
         updateToYear={updateToYear}
+        fromMonthError={fromMonthError}
+        fromYearError={fromYearError}
       />
       <div className="description-box">
         <label htmlFor="description">Description</label>

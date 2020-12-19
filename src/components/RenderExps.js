@@ -26,11 +26,14 @@ const RenderExps = (props) => {
     updateToYear,
     description,
     updateDescription,
-    // edit,
-    // isNew,
     updateState,
     cancelForm,
     deleteExp,
+    titleError,
+    companyError,
+    locationError,
+    fromMonthError,
+    fromYearError,
   } = props;
 
   const checkEnd = (month, year) => {
@@ -38,6 +41,13 @@ const RenderExps = (props) => {
       return 'Present';
     }
     return `${month} ${year}`;
+  };
+
+  const descriptionBox = (exp) => {
+    if (exp.description !== '') {
+      return <p className="submitted-line">{exp.description}</p>;
+    }
+    return '';
   };
 
   return (
@@ -68,11 +78,14 @@ const RenderExps = (props) => {
               updateToYear={updateToYear}
               description={description}
               updateDescription={updateDescription}
-              //   edit={edit}
-              //   isNew={isNew}
               updateState={updateState}
               cancelForm={cancelForm}
               deleteExp={deleteExp}
+              titleError={titleError}
+              companyError={companyError}
+              locationError={locationError}
+              fromMonthError={fromMonthError}
+              fromYearError={fromYearError}
               key={exp.id}
             />
           );
@@ -91,7 +104,7 @@ const RenderExps = (props) => {
             </div>
             <p className="submitted-line">{exp.location}</p>
             <p className="submitted-line">{duration}</p>
-            <p className="submitted-line">{exp.description}</p>
+            {descriptionBox(exp)}
           </div>
         );
       })}
