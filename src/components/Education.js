@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-unused-vars */
@@ -114,6 +115,7 @@ class Education extends Component {
 
       this.updateStateVals(selectedEdu);
       this.disableBtns();
+      this.props.appEditOn();
     }
   };
 
@@ -127,6 +129,7 @@ class Education extends Component {
     this.setState({ educations: copyArr });
     this.enableBtns();
     this.resetErrors();
+    this.props.appEditOff();
   };
 
   deleteEdu = (id) => {
@@ -136,6 +139,7 @@ class Education extends Component {
     });
     this.enableBtns();
     this.resetErrors();
+    this.props.appEditOff();
   };
 
   submitEditChanges = (e, id) => {
@@ -162,6 +166,7 @@ class Education extends Component {
       this.setState({ educations: copyArr });
       this.enableBtns();
       this.resetErrors();
+      this.props.appEditOff();
     }
   };
 
@@ -172,6 +177,7 @@ class Education extends Component {
     }));
 
     this.disableBtns();
+    this.props.appEditOn();
   };
 
   disableBtns = () => {
@@ -211,6 +217,7 @@ class Education extends Component {
 
     this.enableBtns();
     this.resetErrors();
+    this.props.appEditOff();
   };
 
   addEdu = (e) => {

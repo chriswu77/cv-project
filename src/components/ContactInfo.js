@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-undef */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
@@ -84,11 +85,13 @@ class ContactInfo extends Component {
     if (isValid) {
       this.resetErrors();
       this.setState((prevState) => ({ edit: !prevState.edit }));
+      this.props.appEditOff();
     }
   };
 
   openForm = () => {
     this.setState((prevState) => ({ edit: !prevState.edit }));
+    this.props.appEditOn();
   };
 
   resetErrors = () => {

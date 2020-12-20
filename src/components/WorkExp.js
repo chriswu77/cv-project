@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-unused-vars */
@@ -114,6 +115,7 @@ class WorkExp extends Component {
 
       this.updateStateVals(selectedExp);
       this.disableBtns();
+      this.props.appEditOn();
     }
   };
 
@@ -127,6 +129,7 @@ class WorkExp extends Component {
     this.setState({ experiences: copyArr });
     this.enableBtns();
     this.resetErrors();
+    this.props.appEditOff();
   };
 
   deleteExp = (id) => {
@@ -136,6 +139,7 @@ class WorkExp extends Component {
     });
     this.enableBtns();
     this.resetErrors();
+    this.props.appEditOff();
   };
 
   submitEditChanges = (e, id) => {
@@ -162,6 +166,7 @@ class WorkExp extends Component {
       this.setState({ experiences: copyArr });
       this.enableBtns();
       this.resetErrors();
+      this.props.appEditOff();
     }
   };
 
@@ -173,6 +178,7 @@ class WorkExp extends Component {
     }));
 
     this.disableBtns();
+    this.props.appEditOn();
   };
 
   disableBtns = () => {
@@ -212,6 +218,7 @@ class WorkExp extends Component {
 
     this.enableBtns();
     this.resetErrors();
+    this.props.appEditOff();
   };
 
   addExp = (e) => {

@@ -10,14 +10,22 @@ p, h1 {
 }
 
 .contact-info-container, .work-exp-container {
-    /* display: inline-flex;
-    flex-direction: column; */
-    /* max-width: 60%; */
-    /* max-width: 1100px; */
-    border: 2px solid #2d2d2d;
-    padding: 20px;
-    margin-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-bottom: 30px;
 }
+
+.contact-info-container {
+    padding-top: 30px;
+}
+
+/* .edit-heading {
+    margin-bottom: 15px;
+    border: 1px solid #2d2d2d;
+    border-top: none;
+    border-left: none;
+    border-right: none; 
+} */
 
 .App, .edit-view, .submitted-view {
     display: inline-flex;
@@ -29,8 +37,8 @@ p, h1 {
     border-top: none;
     border-left: none;
     border-right: none;
-    /* padding-bottom: 10px; */
-    padding: 15px 0;
+    /* padding: 15px 0; */
+    padding-bottom: 15px;
     width: 100%;
 }
 
@@ -79,12 +87,10 @@ label {
 
 .form {
     font-size: 15px;
-    /* padding: 8px 10px; */
     padding: 6px 12px;
 }
 
 .single-form {
-    /* width: 655px; */
     width: 515px;
 }
 
@@ -129,9 +135,8 @@ label {
 
 .date-dbl-container {
     display: inline-flex;
-    /* justify-content: space-between; */
-    padding-right: 30px;
-    padding-bottom: 12px;
+    padding-bottom: 25px;
+    /* padding-bottom: 12px; */
 }
 
 .date-single-container {
@@ -173,15 +178,14 @@ label {
 .description-box {
     display: flex;
     flex-direction: column;
-    /* padding-right: 30px; */
-    /* padding-bottom: 30px; */
-    padding-top: 18px;
+    /* padding-top: 13px; */
 }
 
 #description {
     font-family: 'Roboto', sans-serif; 
     font-size: 15px;
     padding: 10px;
+    margin-bottom: 25px;
 }
 
 .header, #work-exp-header, .btn-container, .edit-btn-container, .exp-header-container {
@@ -189,7 +193,7 @@ label {
 }
 
 .btn-container, .edit-btn-container {
-    padding-top: 18px;
+    /* padding-top: 18px; */
 }
 
 .edit-btn-container {
@@ -215,7 +219,6 @@ label {
     font-size: 15px;
     margin-left: 10px;
     margin-top: 1px;
-    /* cursor: pointer; */
 }
 
 .exp-container {
@@ -225,6 +228,7 @@ label {
     border-top: none;
     border-left: none;
     border-right: none;
+    padding: 5px 0;
 }
 
 .disable-cursor {
@@ -249,4 +253,22 @@ input:invalid {
 .invalid {
     background-color: #ffdddd !important;
     border-color: #c00000 !important;
+}
+
+#main-content {
+    display: flex;
+    flex-direction: column;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    /* padding: 0 30px; */
+}
+
+#create-pdf-btn {
+    width: fit-content;
+    font-size: 18px;
+    padding: 5px;
+    margin-left: 30px;
 }
