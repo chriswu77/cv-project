@@ -22,8 +22,8 @@ const ContactInfoSubmitted = (props) => {
 
   return (
     <div className="submitted-view">
-      <div className="header">
-        <h1 className="heading">Contact Information</h1>
+      <div className="header edit-heading">
+        <h1 className="heading-text">Contact Information</h1>
         <FontAwesomeIcon
           icon={faEdit}
           className="edit-icon"

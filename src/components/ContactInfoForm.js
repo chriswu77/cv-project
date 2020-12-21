@@ -36,7 +36,7 @@ const ContactInfoForm = (props) => {
 
   return (
     <form className="edit-view" onSubmit={submitData}>
-      <h1 className="heading">Contact Information</h1>
+      <h1 className="heading heading-text">Contact Information</h1>
       <DoubleBox
         title1="First Name"
         type1="text"

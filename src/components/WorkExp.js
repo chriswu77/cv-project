@@ -5,7 +5,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
-import '../style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import uniqid from 'uniqid';
@@ -349,7 +348,7 @@ class WorkExp extends Component {
     return (
       <div className="work-exp-container">
         <div className="heading" id="work-exp-header">
-          <h1>Work Experience</h1>
+          <h1 className="heading-text">Work Experience</h1>
           <div className="icon-wrapper">
             <FontAwesomeIcon
               icon={faPlus}

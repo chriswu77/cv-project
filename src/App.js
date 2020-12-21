@@ -4,7 +4,6 @@
 /* eslint-disable new-cap */
 /* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
-import './style.css';
 import html2pdf from 'html2pdf.js';
 import ContactInfo from './components/ContactInfo';
 import WorkExp from './components/WorkExp';
@@ -20,21 +19,17 @@ class App extends Component {
   }
 
   toggleEditOn = () => {
-    this.setState(
-      {
-        editState: true,
-      },
-      () => console.log(this.state)
-    );
+    this.setState({
+      editState: true,
+    });
+    document.querySelector('#create-pdf-btn').style.opacity = 0.25;
   };
 
   toggleEditOff = () => {
-    this.setState(
-      {
-        editState: false,
-      },
-      () => console.log(this.state)
-    );
+    this.setState({
+      editState: false,
+    });
+    document.querySelector('#create-pdf-btn').style.opacity = 1;
   };
 
   createPDF = () => {
@@ -60,6 +55,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h1 className="main-title">CV Builder</h1>
         <div id="main-content">
           <ContactInfo
             appEditOn={this.toggleEditOn}

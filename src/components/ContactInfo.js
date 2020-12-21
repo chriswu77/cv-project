@@ -2,7 +2,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
-import '../style.css';
 import ContactInfoForm from './ContactInfoForm';
 import ContactInfoSubmitted from './ContactInfoSubmitted';
 

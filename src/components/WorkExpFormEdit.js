@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import '../style.css';
 import DoubleBox from './DoubleBox';
 import SingleBox from './SingleBox';
 import DateBox from './DateBox';

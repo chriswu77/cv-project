@@ -9,6 +9,13 @@ p, h1 {
     margin: 0;
 }
 
+.main-title {
+    padding-left: 30px;
+    padding-top: 30px;
+    font-size: 40px;
+    font-weight: 700;
+}
+
 .contact-info-container, .work-exp-container {
     padding-left: 30px;
     padding-right: 30px;
@@ -19,16 +26,13 @@ p, h1 {
     padding-top: 30px;
 }
 
-/* .edit-heading {
-    margin-bottom: 15px;
-    border: 1px solid #2d2d2d;
-    border-top: none;
-    border-left: none;
-    border-right: none; 
-} */
-
-.App, .edit-view, .submitted-view {
+.App, .edit-view {
     display: inline-flex;
+    flex-direction: column;
+}
+
+.submitted-view {
+    display: flex;
     flex-direction: column;
 }
 
@@ -37,13 +41,13 @@ p, h1 {
     border-top: none;
     border-left: none;
     border-right: none;
-    /* padding: 15px 0; */
     padding-bottom: 15px;
     width: 100%;
 }
 
-.submitted-line {
-    padding: 5px 0;
+.heading-text {
+    font-size: 30px;
+    font-weight: 500;
 }
 
 .heading {
@@ -52,6 +56,18 @@ p, h1 {
     border-top: none;
     border-left: none;
     border-right: none;
+}
+
+.edit-heading {
+    margin-bottom: 15px;
+    border: 1px solid #2d2d2d;
+    border-top: none;
+    border-left: none;
+    border-right: none; 
+}
+
+.submitted-line {
+    padding: 5px 0;
 }
 
 .name {
@@ -82,7 +98,7 @@ label {
 }
 
 .half-form {
-    width: 300px;
+    width: 250px;
 }
 
 .form {
@@ -91,7 +107,7 @@ label {
 }
 
 .single-form {
-    width: 515px;
+    width: 400px;
 }
 
 .save-btn {
@@ -100,9 +116,18 @@ label {
     margin-right: 15px;
 }
 
-.cancel-btn, .trash-btn {
-    color: #2d2d2d;
+.cancel-btn {
+    color: red;
     background-color: #FFFFFF;
+}
+
+.cancel-btn:hover {
+    text-decoration: underline;
+}
+
+.trash-btn {
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 6px -1px rgba(0,0,0,.4);
 }
 
 .trash-icon {
@@ -110,10 +135,12 @@ label {
 }
 
 .save-btn, .cancel-btn, .trash-btn {
+    font-family: 'Roboto', sans-serif; 
     font-size: 15px;
-    padding: 5px;
-    border-radius: 5px;
+    padding: 6px 20px;
+    border-radius: 3px;
     cursor: pointer;
+    border: 1px solid transparent;
 }
 
 .form-control, .flag-dropdown {
@@ -122,21 +149,21 @@ label {
 
 .react-tel-input .form-control {
     height: 33px !important;
-	width: 328px !important;
+    width: 278px !important;
     font-size: 15px !important;
+    border-radius: 2px !important;
 }
 
 .edit-icon {
     font-size: 20px;
     margin-left: 15px;
-    margin-top: 8px;
+    margin-top: 7px;
     cursor: pointer;
 }
 
 .date-dbl-container {
     display: inline-flex;
     padding-bottom: 25px;
-    /* padding-bottom: 12px; */
 }
 
 .date-single-container {
@@ -158,15 +185,14 @@ label {
 
 #from-month-dropdown, #to-month-dropdown, #from-year, #to-year {
     font-size: 15px;
+    padding: 0px 0px 0px 5px;
 }
 
 #from-month-dropdown, #to-month-dropdown {
     height: 33px;
-    padding: 0px 0px 0px 5px;
 }
 
 #from-year, #to-year {
-    padding: 0px 0px 0px 5px;
     margin: 0;
     height: 29px;
 }
@@ -178,22 +204,17 @@ label {
 .description-box {
     display: flex;
     flex-direction: column;
-    /* padding-top: 13px; */
 }
 
 #description {
     font-family: 'Roboto', sans-serif; 
     font-size: 15px;
-    padding: 10px;
+    padding: 10px 12px;
     margin-bottom: 25px;
 }
 
 .header, #work-exp-header, .btn-container, .edit-btn-container, .exp-header-container {
     display: flex;
-}
-
-.btn-container, .edit-btn-container {
-    /* padding-top: 18px; */
 }
 
 .edit-btn-container {
@@ -208,7 +229,7 @@ label {
 .plus-icon {
     font-size: 20px;
     margin-left: 15px;
-    margin-top: 9px;
+    margin-top: 7.5px;
 }
 
 .exp-title {
@@ -263,12 +284,21 @@ input:invalid {
 #root {
     display: flex;
     flex-direction: column;
-    /* padding: 0 30px; */
 }
 
 #create-pdf-btn {
+    font-family: 'Roboto', sans-serif; 
     width: fit-content;
     font-size: 18px;
-    padding: 5px;
+    padding: 6px 20px;
     margin-left: 30px;
+    background-color: #61A085;
+    color: #FFFFFF;
+    border-radius: 3px;
+    cursor: pointer;
+    opacity: .25;
+}
+
+#create-pdf-btn:focus {
+    outline: none;
 }
