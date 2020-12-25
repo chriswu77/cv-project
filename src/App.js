@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-undef */
@@ -14,26 +15,57 @@ class App extends Component {
     super();
 
     this.state = {
-      editState: true,
+      contactEditState: true,
+      workExpEditState: false,
+      educationEditState: false,
     };
   }
 
-  toggleEditOn = () => {
-    this.setState({
-      editState: true,
-    });
-    document.querySelector('#create-pdf-btn').style.opacity = 0.25;
+  toggleBtnState = () => {
+    if (
+      !this.state.contactEditState &&
+      !this.state.workExpEditState &&
+      !this.state.educationEditState
+    ) {
+      document.querySelector('#create-pdf-btn').style.opacity = 1;
+    } else {
+      document.querySelector('#create-pdf-btn').style.opacity = 0.25;
+    }
   };
 
-  toggleEditOff = () => {
-    this.setState({
-      editState: false,
-    });
-    document.querySelector('#create-pdf-btn').style.opacity = 1;
+  setContactState = (status) => {
+    this.setState(
+      {
+        contactEditState: status,
+      },
+      () => this.toggleBtnState()
+    );
+  };
+
+  setWorkExpEditState = (status) => {
+    this.setState(
+      {
+        workExpEditState: status,
+      },
+      () => this.toggleBtnState()
+    );
+  };
+
+  setEducationEditState = (status) => {
+    this.setState(
+      {
+        educationEditState: status,
+      },
+      () => this.toggleBtnState()
+    );
   };
 
   createPDF = () => {
-    if (!this.state.editState) {
+    if (
+      !this.state.contactEditState &&
+      !this.state.workExpEditState &&
+      !this.state.educationEditState
+    ) {
       const editIcon = document.querySelector('.edit-icon');
       const plusIcons = Array.from(document.querySelectorAll('.icon-wrapper'));
 
@@ -43,7 +75,7 @@ class App extends Component {
       });
 
       const content = document.querySelector('#main-content');
-      html2pdf().from(content).save();
+      html2pdf().from(content).save('resume.pdf');
 
       editIcon.style.display = 'inline-block';
       plusIcons.forEach((icon) => {
@@ -57,18 +89,9 @@ class App extends Component {
       <div className="App">
         <h1 className="main-title">CV Builder</h1>
         <div id="main-content">
-          <ContactInfo
-            appEditOn={this.toggleEditOn}
-            appEditOff={this.toggleEditOff}
-          />
-          <WorkExp
-            appEditOn={this.toggleEditOn}
-            appEditOff={this.toggleEditOff}
-          />
-          <Education
-            appEditOn={this.toggleEditOn}
-            appEditOff={this.toggleEditOff}
-          />
+          <ContactInfo appEdit={this.setContactState} />
+          <WorkExp appEdit={this.setWorkExpEditState} />
+          <Education appEdit={this.setEducationEditState} />
         </div>
         <button id="create-pdf-btn" type="button" onClick={this.createPDF}>
           Create PDF

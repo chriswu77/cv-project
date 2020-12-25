@@ -84,18 +84,23 @@ class WorkExp extends Component {
   };
 
   resetStateVals = () => {
-    this.setState({
-      title: '',
-      company: '',
-      location: '',
-      fromMonth: '',
-      fromYear: '',
-      toMonth: '',
-      toYear: '',
-      description: '',
-      edit: false,
-      newForm: false,
-    });
+    this.setState(
+      {
+        title: '',
+        company: '',
+        location: '',
+        fromMonth: '',
+        fromYear: '',
+        toMonth: '',
+        toYear: '',
+        description: '',
+        edit: false,
+        newForm: false,
+      },
+      () => {
+        this.props.appEdit(this.state.edit);
+      }
+    );
   };
 
   toggleEditState = (e) => {
@@ -107,14 +112,18 @@ class WorkExp extends Component {
       const selectedExp = copyArr[index];
       selectedExp.editState = true;
 
-      this.setState((prevState) => ({
-        edit: !prevState.edit,
-        experiences: copyArr,
-      }));
+      this.setState(
+        (prevState) => ({
+          edit: !prevState.edit,
+          experiences: copyArr,
+        }),
+        () => {
+          this.props.appEdit(this.state.edit);
+        }
+      );
 
       this.updateStateVals(selectedExp);
       this.disableBtns();
-      this.props.appEditOn();
     }
   };
 
@@ -128,7 +137,6 @@ class WorkExp extends Component {
     this.setState({ experiences: copyArr });
     this.enableBtns();
     this.resetErrors();
-    this.props.appEditOff();
   };
 
   deleteExp = (id) => {
@@ -138,7 +146,6 @@ class WorkExp extends Component {
     });
     this.enableBtns();
     this.resetErrors();
-    this.props.appEditOff();
   };
 
   submitEditChanges = (e, id) => {
@@ -165,19 +172,22 @@ class WorkExp extends Component {
       this.setState({ experiences: copyArr });
       this.enableBtns();
       this.resetErrors();
-      this.props.appEditOff();
     }
   };
 
   toggleNewForm = (e) => {
     e.preventDefault();
-    this.setState((prevState) => ({
-      newForm: !prevState.newForm,
-      edit: !prevState.edit,
-    }));
+    this.setState(
+      (prevState) => ({
+        newForm: !prevState.newForm,
+        edit: !prevState.edit,
+      }),
+      () => {
+        this.props.appEdit(this.state.edit);
+      }
+    );
 
     this.disableBtns();
-    this.props.appEditOn();
   };
 
   disableBtns = () => {
@@ -217,7 +227,6 @@ class WorkExp extends Component {
 
     this.enableBtns();
     this.resetErrors();
-    this.props.appEditOff();
   };
 
   addExp = (e) => {

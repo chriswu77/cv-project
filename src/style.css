@@ -68,6 +68,7 @@ p, h1 {
 
 .submitted-line {
     padding: 5px 0;
+    white-space: pre-wrap;
 }
 
 .name {
@@ -211,6 +212,7 @@ label {
     font-size: 15px;
     padding: 10px 12px;
     margin-bottom: 25px;
+    white-space: pre-wrap;
 }
 
 .header, #work-exp-header, .btn-container, .edit-btn-container, .exp-header-container {

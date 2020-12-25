@@ -84,18 +84,23 @@ class Education extends Component {
   };
 
   resetStateVals = () => {
-    this.setState({
-      school: '',
-      degree: '',
-      major: '',
-      minor: '',
-      fromMonth: '',
-      fromYear: '',
-      toMonth: '',
-      toYear: '',
-      edit: false,
-      newForm: false,
-    });
+    this.setState(
+      {
+        school: '',
+        degree: '',
+        major: '',
+        minor: '',
+        fromMonth: '',
+        fromYear: '',
+        toMonth: '',
+        toYear: '',
+        edit: false,
+        newForm: false,
+      },
+      () => {
+        this.props.appEdit(this.state.edit);
+      }
+    );
   };
 
   toggleEditState = (e) => {
@@ -107,14 +112,18 @@ class Education extends Component {
       const selectedEdu = copyArr[index];
       selectedEdu.editState = true;
 
-      this.setState((prevState) => ({
-        edit: !prevState.edit,
-        educations: copyArr,
-      }));
+      this.setState(
+        (prevState) => ({
+          edit: !prevState.edit,
+          educations: copyArr,
+        }),
+        () => {
+          this.props.appEdit(this.state.edit);
+        }
+      );
 
       this.updateStateVals(selectedEdu);
       this.disableBtns();
-      this.props.appEditOn();
     }
   };
 
@@ -128,7 +137,6 @@ class Education extends Component {
     this.setState({ educations: copyArr });
     this.enableBtns();
     this.resetErrors();
-    this.props.appEditOff();
   };
 
   deleteEdu = (id) => {
@@ -138,7 +146,6 @@ class Education extends Component {
     });
     this.enableBtns();
     this.resetErrors();
-    this.props.appEditOff();
   };
 
   submitEditChanges = (e, id) => {
@@ -165,18 +172,21 @@ class Education extends Component {
       this.setState({ educations: copyArr });
       this.enableBtns();
       this.resetErrors();
-      this.props.appEditOff();
     }
   };
 
   toggleNewForm = () => {
-    this.setState((prevState) => ({
-      newForm: !prevState.newForm,
-      edit: !prevState.edit,
-    }));
+    this.setState(
+      (prevState) => ({
+        newForm: !prevState.newForm,
+        edit: !prevState.edit,
+      }),
+      () => {
+        this.props.appEdit(this.state.edit);
+      }
+    );
 
     this.disableBtns();
-    this.props.appEditOn();
   };
 
   disableBtns = () => {
@@ -216,7 +226,6 @@ class Education extends Component {
 
     this.enableBtns();
     this.resetErrors();
-    this.props.appEditOff();
   };
 
   addEdu = (e) => {

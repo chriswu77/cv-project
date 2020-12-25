@@ -83,14 +83,22 @@ class ContactInfo extends Component {
     const isValid = this.validateForm();
     if (isValid) {
       this.resetErrors();
-      this.setState((prevState) => ({ edit: !prevState.edit }));
-      this.props.appEditOff();
+      this.setState(
+        (prevState) => ({ edit: !prevState.edit }),
+        () => {
+          this.props.appEdit(this.state.edit);
+        }
+      );
     }
   };
 
   openForm = () => {
-    this.setState((prevState) => ({ edit: !prevState.edit }));
-    this.props.appEditOn();
+    this.setState(
+      (prevState) => ({ edit: !prevState.edit }),
+      () => {
+        this.props.appEdit(this.state.edit);
+      }
+    );
   };
 
   resetErrors = () => {
