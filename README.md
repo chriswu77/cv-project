@@ -4,4 +4,4 @@ CV generator as part of The Odin Project. Allows user to generate a PDF after in
 
 First React project.
 
-Live link: https://huskyharris.github.io/cv-project/
+Live link: https://chriswu77.github.io/cv-project/
